@@ -37,3 +37,10 @@ class Comment(models.Model):
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     approved_comments = models.BooleanField(default=False)
+
+    def approve_comments(self):
+        self.approved_comments = True
+        self.save()
+
+    def __str__(self):
+        return self.text
