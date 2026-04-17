@@ -39,16 +39,14 @@ class PostDetailView(DetailView):
 class CreatePostView(LoginRequiredMixin, CreateView):
     # Require login before allowing a user to create a new post.
     model = Post
-    login_url = "login/"
-    redirect_field_name = "blog/post_detail.html"
+    login_url = reverse_lazy("login")
     form_class = PostForm
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     # Reuse the post form when editing an existing post.
     model = Post
-    login_url = "login/"
-    redirect_field_name = "blog/post_detail.html"
+    login_url = reverse_lazy("login")
     form_class = PostForm
 
     def test_func(self):
@@ -76,8 +74,9 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class DraftListView(LoginRequiredMixin, ListView):
     # List posts that have been created but not published yet.
-    login_url = "login/"
-    redirect_field_name = "blog/post_detail.html"
+    login_url = reverse_lazy("login")
+    template_name = "blog/post_draft_list.html"
+    context_object_name = "posts"
 
     def get_queryset(self):
         return Post.objects.filter(published_date__isnull=True).order_by(
