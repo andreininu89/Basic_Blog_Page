@@ -7,8 +7,8 @@
     {% else %}
         <a class="btn btn-secondary" href="{% url 'blog:post_publish' pk=post.pk %}">Publish</a>
     {% endif %}
-    <p class="postcontent">{{ post.title|safe|linebreaksbr }}</p>
-    <p class="postcontent">{{ post.text|safe|linebreaksbr }}</p>
+    <p class="postcontent ">{{ post.title|safe|linebreaksbr }}</p>
+    <div class="sancreek-regular ">{{ post.text|safe|linebreaksbr }}</div>
     {% if user.is_authenticated %}
         <a class="btn btn-primary me-2" href="{% url 'blog:post_update' pk=post.pk %}">
         <i class="bi bi-pencil-fill"></i>
@@ -20,7 +20,7 @@
     <hr>
     <div class="container">
         <!-- Entry point for adding a new comment to this post. -->
-        <a href="{% url 'blog:add_comment_to_post' pk=post.pk %}">Add Comment</a>
+        <a class="btn btn-primary me-2" href="{% url 'blog:add_comment_to_post' pk=post.pk %}">Add Comment</a>
     </div>
     <div class="container">
         <!-- Show each comment and moderation actions when available. -->

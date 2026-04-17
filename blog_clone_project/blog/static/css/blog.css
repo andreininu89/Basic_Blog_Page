@@ -31,7 +31,7 @@
 .bigbrand{
     /* Make the navbar brand larger than the surrounding links. */
     font-family: "Sancreek", serif;
-    font-size: 1.5em;
+    font-size: 2em;
 }
 .centerstage{
   /* Keep the post list container centered in its available space. */
@@ -45,12 +45,12 @@
 .posttitle{
   /* Increase the title size for the single post view. */
   font-family: "Sancreek", serif;
-  font-size: 3em;
+  font-size: 5em;
 }
 .postcontent{
   /* Style the main post body with the same decorative font. */
   font-family: "Sancreek", serif;
-  font-size: 1.5em;
+  font-size: 3em;
 }
 
 .btn-comment{
