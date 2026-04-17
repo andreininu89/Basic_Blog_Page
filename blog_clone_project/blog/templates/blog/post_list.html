@@ -3,11 +3,11 @@
     <div class="centerstage">
     <!-- Render each published post in the homepage listing. -->
     {% for post in post_list %}
-        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+        <h1><a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
         <div class="date">
             <p>Published on: {{ post.published|date:"D M Y" }}</p>
         </div>
-        <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
+        <a href="{% url 'blog:post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
     {% endfor %}
     </div>
 {% endblock content %}

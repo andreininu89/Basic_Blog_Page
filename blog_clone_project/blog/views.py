@@ -44,20 +44,19 @@ class CreatePostView(LoginRequiredMixin, CreateView):
     form_class = PostForm
 
 
-# from django.urls import reverse_lazy
-#
-# class CreatePostView(LoginRequiredMixin, CreateView):
-#     model = Post
-#     form_class = PostForm
-#     login_url = reverse_lazy("login")
-
-
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     # Reuse the post form when editing an existing post.
     model = Post
     login_url = "login/"
     redirect_field_name = "blog/post_detail.html"
     form_class = PostForm
+    def test_func(self):
+        # Get the specific post the user is trying to update
+        post = self.get_object()
+        # Check if the current logged-in user is the author
+        if self.request.user == post.author:
+            return True
+        return False
 
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -72,7 +71,9 @@ class DraftListView(LoginRequiredMixin, ListView):
     redirect_field_name = "blog/post_detail.html"
 
     def get_queryset(self):
-        return Post.objects.filter(published_date__isn=True).order_by("-created_date")
+        return Post.objects.filter(published_date__isnull=True).order_by(
+            "-created_date"
+        )
 
 
 @login_required
@@ -85,7 +86,7 @@ def add_comment_to_post(request, pk):
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
-            return redirect("post_detail", pk=post.pk)
+            return redirect("blog:post_detail", pk=post.pk)
     else:
         form = CommentForm()
 
@@ -97,7 +98,7 @@ def comment_approve(request, pk):
     # Approve a comment and return to the related post.
     comment = get_object_or_404(Comment, pk=pk)
     comment.approve_comments()
-    return redirect("post_detail", pk=comment.post.pk)
+    return redirect("blog:post_detail", pk=comment.post.pk)
 
 
 @login_required
@@ -106,7 +107,7 @@ def comment_remove(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     post_pk = comment.post.pk
     comment.delete()
-    return redirect("post_detail", pk=post_pk)
+    return redirect("blog:post_detail", pk=post_pk)
 
 
 @login_required
@@ -114,4 +115,4 @@ def post_publish(request, pk):
     # Publish a draft post and open its detail page.
     post = get_object_or_404(Post, pk=pk)
     post.publish()
-    return redirect("post_detail", pk=post.pk)
+    return redirect("blog:post_detail", pk=post.pk)

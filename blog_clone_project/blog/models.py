@@ -24,7 +24,7 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         # Send Django back to this post's detail page after create/update actions.
-        return reverse("post_detail", kwargs={"pk": self.pk})
+        return reverse("blog:post_detail", kwargs={"pk": self.pk})
 
     def __str__(self):
         # Use the post title in the admin and shell output.
