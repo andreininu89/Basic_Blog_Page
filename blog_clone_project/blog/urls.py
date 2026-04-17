@@ -4,6 +4,7 @@ from blog import views
 
 app_name = "blog"
 
+# Route blog pages and moderation actions through the app namespace.
 urlpatterns = [
     path("about/", views.AboutView.as_view(), name="about"),
     path("", views.PostListView.as_view(), name="post_list"),

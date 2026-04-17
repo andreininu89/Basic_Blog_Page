@@ -18,25 +18,28 @@
 
 </head>
 <body>
-<div class="container mt-5">
-
-</div>
+    <!-- Spacer container above the navbar. -->
+    <div class="container mt-5">
+    </div>
     <!-- Navbar -->
     <div class="container ">
         <nav class="navbar sancreek-regular navbar-expand-lg bg-body-tertiary ">
             <div class="container-fluid">
+                <!-- Brand link that returns to the main post list. -->
                 <a class="navbar-brand bigbrand" href="{% url 'blog:post_list' %}">My Blog</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
+                        <!-- Public navigation links. -->
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'blog:about' %}">About</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="https://github.com/andreininu89">Github</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="https://www.linkedin.com/in/andrei-ninu-919611146/">LinkedIn</a></li>
                     </ul>
                     <ul class="navbar-nav navbar-right">
                         {% if user.is_authenticated %}
+                            <!-- Authenticated users can create and manage posts. -->
                             <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{% url 'blog:post_new' %}">New Post</a>
                             </li>
@@ -65,6 +68,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="blog_posts">
+                    <!-- Child templates inject page-specific content here. -->
                     {% block content %}
                     {% endblock %}
                 </div>

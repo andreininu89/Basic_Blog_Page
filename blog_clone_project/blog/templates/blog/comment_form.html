@@ -1,10 +1,12 @@
 {% extends "blog/base.html" %}
 {% block content %}
     <h1>New Comment</h1>
+    <!-- Reuse Django's generated form output for comment submission. -->
     <form class="post-form" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Post Comment</button>
     </form>
+    <!-- Apply the same rich-text editor class used on post forms. -->
     <script>var editor = new MediumEditor('.editable');</script>
 {% endblock content %}

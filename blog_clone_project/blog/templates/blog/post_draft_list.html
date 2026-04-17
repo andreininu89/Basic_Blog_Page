@@ -1,5 +1,6 @@
 {% extends "blog/base.html" %}
 {% block content %}
+    <!-- Loop through unpublished posts so drafts can be reviewed. -->
     {% for post in posts %}
         <div class="post">
             <p class="date">Created: {{ post.created_date|date:"d-m-Y" }}</p>

@@ -1,4 +1,5 @@
 .loader {
+  /* Animate the post title with a moving rainbow gradient. */
   animation-name: rainbow;
   animation-duration: 2000ms;
   animation-iteration-count: infinite;
@@ -21,32 +22,39 @@
 }
 
 .sancreek-regular {
+  /* Shared font utility for headings and branding. */
   font-family: "Sancreek", serif;
   font-weight: 400;
   font-style: normal;
 }
 
 .bigbrand{
+    /* Make the navbar brand larger than the surrounding links. */
     font-family: "Sancreek", serif;
     font-size: 1.5em;
 }
 .centerstage{
+  /* Keep the post list container centered in its available space. */
   margin-left: auto;
   margin-right: auto;
 }
 .postdate{
+  /* Center the published date beneath the title. */
   text-align: center;
 }
 .posttitle{
+  /* Increase the title size for the single post view. */
   font-family: "Sancreek", serif;
   font-size: 3em;
 }
 .postcontent{
+  /* Style the main post body with the same decorative font. */
   font-family: "Sancreek", serif;
   font-size: 1.5em;
 }
 
 .btn-comment{
+  /* Pin comment action buttons to the right edge. */
   position: absolute;
   right: 0;
 }

@@ -15,14 +15,14 @@ from django.utils import timezone
 from blog.forms import PostForm, CommentForm
 from blog.models import Post, Comment
 
-# Create your views here.
-
 
 class AboutView(TemplateView):
+    # Render the static about page.
     template_name = "blog/about.html"
 
 
 class PostListView(ListView):
+    # Display only published posts, newest first.
     model = Post
 
     def get_queryset(self):
@@ -32,10 +32,12 @@ class PostListView(ListView):
 
 
 class PostDetailView(DetailView):
+    # Show one post with its related comments.
     model = Post
 
 
 class CreatePostView(LoginRequiredMixin, CreateView):
+    # Require login before allowing a user to create a new post.
     model = Post
     login_url = "login/"
     redirect_field_name = "blog/post_detail.html"
@@ -51,6 +53,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    # Reuse the post form when editing an existing post.
     model = Post
     login_url = "login/"
     redirect_field_name = "blog/post_detail.html"
@@ -58,11 +61,13 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    # After deletion, return the user to the post list.
     model = Post
     success_url = reverse_lazy("post_list")
 
 
 class DraftListView(LoginRequiredMixin, ListView):
+    # List posts that have been created but not published yet.
     login_url = "login/"
     redirect_field_name = "blog/post_detail.html"
 
@@ -72,6 +77,7 @@ class DraftListView(LoginRequiredMixin, ListView):
 
 @login_required
 def add_comment_to_post(request, pk):
+    # Bind the submitted comment to the selected post before saving it.
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -88,6 +94,7 @@ def add_comment_to_post(request, pk):
 
 @login_required
 def comment_approve(request, pk):
+    # Approve a comment and return to the related post.
     comment = get_object_or_404(Comment, pk=pk)
     comment.approve_comments()
     return redirect("post_detail", pk=comment.post.pk)
@@ -95,6 +102,7 @@ def comment_approve(request, pk):
 
 @login_required
 def comment_remove(request, pk):
+    # Delete the comment, then redirect using the saved post id.
     comment = get_object_or_404(Comment, pk=pk)
     post_pk = comment.post.pk
     comment.delete()
@@ -103,6 +111,7 @@ def comment_remove(request, pk):
 
 @login_required
 def post_publish(request, pk):
+    # Publish a draft post and open its detail page.
     post = get_object_or_404(Post, pk=pk)
     post.publish()
     return redirect("post_detail", pk=post.pk)

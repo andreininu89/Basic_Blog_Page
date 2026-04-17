@@ -4,8 +4,10 @@
         <h2>Please Login:</h2>
         <h3>(Must be SuperUser, please check with the site admin)</h3>
         {% if form.errors %}
+            <!-- Show a basic authentication error when credentials fail. -->
             <p>Your username and password didn't match. Please try again.</p>
         {% endif %}
+        <!-- Submit credentials to Django's built-in login view. -->
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
             {{ form.as_p }}

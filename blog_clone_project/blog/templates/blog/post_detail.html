@@ -1,5 +1,6 @@
 {% extends "blog/base.html" %}
 {% block content %}
+    <!-- Display the selected post and its moderation controls. -->
     <h1 class="posttitle loader">{{ post.title }}</h1>
     {% if post.published_date %}
         <div class="date postdate">{{ post.published_date }}</div>
@@ -17,9 +18,11 @@
     {% endif %}
     <hr>
     <div class="container">
+        <!-- Entry point for adding a new comment to this post. -->
         <a href="{% url 'blog:add_comment_to_post' pk=post.pk %}">Add Comment</a>
     </div>
     <div class="container">
+        <!-- Show each comment and moderation actions when available. -->
         {% for comment in post.comments.all %}
             <br>
             {% if user.is_authenticated or comment.approved_comment%}
