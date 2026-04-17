@@ -3,7 +3,7 @@
     <!-- Display the selected post and its moderation controls. -->
     <h1 class="posttitle loader">{{ post.title }}</h1>
     {% if post.published_date %}
-        <div class="date postdate">{{ post.published_date }}</div>
+        <div class="date postdate">Published on: {{ post.published_date }}</div>
     {% else %}
         <a class="btn btn-default" href="{% url 'blog:post_publish' pk=post.pk %}">Publish</a>
     {% endif %}

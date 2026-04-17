@@ -47,8 +47,14 @@
                             <a class="nav-link active" aria-current="page" href="{% url 'blog:draft_list' %}">Drafts</a>
                             </li>
                             <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
+                                <form action="{% url 'logout' %}" method="post" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="nav-link btn btn-link shadow-none border-0 py-2 px-3 active" style="text-decoration: none;">
+                                        Logout
+                                    </button>
+                                </form>
                             </li>
+
                             <li class="nav-item">
                             <a class="nav-link active" aria-current="page" >Welcome: {{ user.username }}</a>
                             </li>

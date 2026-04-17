@@ -50,6 +50,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     login_url = "login/"
     redirect_field_name = "blog/post_detail.html"
     form_class = PostForm
+
     def test_func(self):
         # Get the specific post the user is trying to update
         post = self.get_object()
@@ -62,7 +63,15 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     # After deletion, return the user to the post list.
     model = Post
-    success_url = reverse_lazy("post_list")
+    success_url = reverse_lazy("blog:post_list")
+
+    def test_func(self):
+        # Get the specific post the user is trying to delete
+        post = self.get_object()
+        # Check if the current logged-in user is the author
+        if self.request.user == post.author:
+            return True
+        return False
 
 
 class DraftListView(LoginRequiredMixin, ListView):

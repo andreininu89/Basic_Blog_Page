@@ -3,7 +3,7 @@
     <!-- Loop through unpublished posts so drafts can be reviewed. -->
     {% for post in posts %}
         <div class="post">
-            <p class="date">Created: {{ post.created_date|date:"d-m-Y" }}</p>
+            <p class="date">Created: {{ post.created_date|date:"D M Y" }}</p>
             <h1><a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
             <p>{{ post.text|truncatechars:200 }}</p>
         </div>

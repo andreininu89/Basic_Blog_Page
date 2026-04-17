@@ -4,6 +4,7 @@
     <!-- Render each published post in the homepage listing. -->
     {% for post in post_list %}
         <h1><a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+        <p>{{ post.text|safe|truncatechars_html:200 }}</p>
         <div class="date">
             <p>Published on: {{ post.published_date|date:"D M Y" }}</p>
         </div>
