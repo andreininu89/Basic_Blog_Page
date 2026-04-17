@@ -1,4 +1,4 @@
-h1 {
+.loader {
   animation-name: rainbow;
   animation-duration: 2000ms;
   animation-iteration-count: infinite;
@@ -29,4 +29,8 @@ h1 {
 .bigbrand{
     font-family: "Sancreek", serif;
     font-size: 1.5em;
+}
+.centerstage{
+  margin-left: auto;
+  margin-right: auto;
 }
