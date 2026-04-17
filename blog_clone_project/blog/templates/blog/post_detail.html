@@ -26,9 +26,9 @@
         <!-- Show each comment and moderation actions when available. -->
         {% for comment in post.comments.all %}
             <br>
-            {% if user.is_authenticated or comment.approved_comment%}
+            {% if user.is_authenticated or comment.approved_comments %}
                 {{ comment.created_date }}
-                {% if not comment.approved_comment %}
+                {% if not comment.approved_comments %}
                     <a class="btn btn-secondary" href="{% url 'blog:comment_remove' pk=comment.pk %}">
                     <span class="bi bi-x-lg"></span>
                     </a>
