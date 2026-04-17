@@ -8,12 +8,13 @@
         <a class="btn btn-default" href="{% url 'blog:post_publish' pk=post.pk %}">Publish</a>
     {% endif %}
     <p class="postcontent">{{ post.title|safe|linebreaksbr }}</p>
+    <p class="postcontent">{{ post.text|safe|linebreaksbr }}</p>
     {% if user.is_authenticated %}
         <a class="btn btn-primary" href="{% url 'blog:post_update' pk=post.pk %}">
-        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="bi bi-check-lg"></span>
         </a>
-        <a class="btn btn-primary" href="{% url 'blog:post_delete' pk=post.pk %}">
-        <span class="glyphicon glyphicon-remove"></span>
+        <a class="btn btn-secondary" href="{% url 'blog:post_delete' pk=post.pk %}">
+        <span class="bi bi-x-lg"></span>
         </a>
     {% endif %}
     <hr>
